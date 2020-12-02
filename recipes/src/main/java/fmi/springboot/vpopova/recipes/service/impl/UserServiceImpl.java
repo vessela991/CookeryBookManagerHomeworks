@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
     public String getCurrentUserId(String token) {
         return jwtUtil.getUserId(token);
     }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

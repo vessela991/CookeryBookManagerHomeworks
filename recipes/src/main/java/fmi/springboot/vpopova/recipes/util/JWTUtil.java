@@ -3,6 +3,7 @@ package fmi.springboot.vpopova.recipes.util;
 import java.util.Date;
 import java.util.function.Function;
 
+import io.jsonwebtoken.Jwt;
 import org.springframework.stereotype.Service;
 
 import fmi.springboot.vpopova.recipes.model.UserPrincipal;
@@ -13,17 +14,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JWTUtil {
 
-    public static final String SECRET = "SECRETSECRETSECRETSECRETSECRETSECRET";
+    public static final String SECRET = "secret";
     public static final int EXPIRATION_TIME = 864_000_000; // 10 days
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
-
-    private static Claims decodeJWT(String jwt) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(SECRET)
-                .parseClaimsJws(jwt).getBody();
-        return claims;
-    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -48,7 +42,7 @@ public class JWTUtil {
 
     public String generateToken(UserPrincipal userDetails) {
         Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
-        claims.put("userId", userDetails.getId());
+        claims.put("userId", userDetails.getId() + "");
         claims.put("role", userDetails.getRole());
         claims.setIssuedAt(new Date(System.currentTimeMillis()));
         claims.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME));
@@ -68,7 +62,14 @@ public class JWTUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String getUserId(String token) {
+    private static Claims decodeJWT(String jwt) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET)
+                .parseClaimsJws(jwt).getBody();
+        return claims;
+    }
+
+    public String getUserId(String token){
         return decodeJWT(token).get("userId").toString();
     }
 }

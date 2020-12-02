@@ -12,8 +12,8 @@ public class ResponseEntityUtil {
     public static String USER_LOCATION_VALUE = "/api/users/%s";
 
     public static ResponseEntity RecipeWithLocationHeader(RecipeRequestDTO recipeRequestDTO, HttpStatus httpStatus) {
-        return getResponseEntityWithLocationHeader(RECIPE_LOCATION_VALUE, httpStatus, recipeRequestDTO.getRecipeId(),
-                recipeRequestDTO.getUserId());
+        return getResponseEntityWithLocationHeader(RECIPE_LOCATION_VALUE, httpStatus, recipeRequestDTO.getUserId(),
+                recipeRequestDTO.getRecipeId());
     }
 
     public static ResponseEntity UserWithLocationHeader(String userId, HttpStatus httpStatus) {

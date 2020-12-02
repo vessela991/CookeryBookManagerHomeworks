@@ -39,10 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/api/users").hasRole(Role.ADMIN.name())
                 .and().authorizeRequests().antMatchers("/api/users/:userId").hasRole(Role.ADMIN.name())
                 .and().authorizeRequests().antMatchers(HttpMethod.POST,"/api/recipes").authenticated()
-                // .and().authorizeRequests().antMatchers(HttpMethod.GET, "/charity").permitAll()
-                // .and().authorizeRequests().antMatchers(HttpMethod.GET,"/charities").permitAll()
-                // .and().authorizeRequests().antMatchers(HttpMethod.GET,"/charity/**").permitAll()
-                //.anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

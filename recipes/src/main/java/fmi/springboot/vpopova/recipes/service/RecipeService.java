@@ -6,7 +6,7 @@ import fmi.springboot.vpopova.recipes.model.Recipe;
 import fmi.springboot.vpopova.recipes.model.request.RecipeRequestDTO;
 
 public interface RecipeService {
-    String saveOrUpdate(Recipe recipe);
+    String saveOrUpdate(Recipe recipe, String userId);
 
     Recipe getRecipeById(RecipeRequestDTO recipeRequestDTO);
 

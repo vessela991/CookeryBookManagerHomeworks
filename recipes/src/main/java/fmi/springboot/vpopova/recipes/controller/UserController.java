@@ -38,13 +38,13 @@ public class UserController {
         return ResponseEntityUtil.UserWithLocationHeader(savedUser.getId(), HttpStatus.CREATED);
     }
 
-    @GetMapping("/:userId")
+    @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User getUserById(@PathVariable("userId") String userId) {
         return userService.getUserById(userId);
     }
 
-    @PutMapping("/:userId")
+    @PutMapping("/{userId}")
     public ResponseEntity editUserById(@PathVariable("userId") String userId, @RequestBody User user) {
         user.setId(userId);
         User updatedUser = userService.saveOrUpdate(user);
@@ -53,7 +53,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/:userId")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable("userId") String userId) {
         userService.deleteUserById(userId);

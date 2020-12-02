@@ -1,5 +1,7 @@
 package fmi.springboot.vpopova.recipes.controller;
 
+import fmi.springboot.vpopova.recipes.model.User;
+import fmi.springboot.vpopova.recipes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +30,4 @@ public class IdentityController {
     public RegisterResponseDTO register(@RequestBody RegisterRequestDTO model) {
         return identityService.register(model);
     }
-
 }

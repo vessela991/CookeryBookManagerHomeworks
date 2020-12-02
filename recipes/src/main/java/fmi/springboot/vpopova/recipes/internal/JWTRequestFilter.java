@@ -41,7 +41,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             username = jwtUtil.extractUsername(jwt);
         }
 
-        HeaderMapRequestWrapper wrappedRequest = new HeaderMapRequestWrapper(httpServletRequest);
+//        HeaderMapRequestWrapper wrappedRequest = new HeaderMapRequestWrapper(httpServletRequest);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
@@ -54,11 +54,11 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
-                String userId = jwtUtil.getUserId(jwt);
-                wrappedRequest.addHeader("userId", userId);
+//                String userId = jwtUtil.getUserId(jwt);
+//                wrappedRequest.addHeader("userId", userId);
             }
         }
 
-        filterChain.doFilter(wrappedRequest, httpServletResponse);
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }
