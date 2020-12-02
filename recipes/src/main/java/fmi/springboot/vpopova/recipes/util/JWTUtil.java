@@ -1,15 +1,13 @@
 package fmi.springboot.vpopova.recipes.util;
 
-import java.util.Date;
-import java.util.function.Function;
-
-import io.jsonwebtoken.Jwt;
-import org.springframework.stereotype.Service;
-
 import fmi.springboot.vpopova.recipes.model.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.function.Function;
 
 @Service
 public class JWTUtil {
@@ -69,7 +67,7 @@ public class JWTUtil {
         return claims;
     }
 
-    public String getUserId(String token){
+    public String getUserId(String token) {
         return decodeJWT(token).get("userId").toString();
     }
 }

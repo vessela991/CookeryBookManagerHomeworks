@@ -1,18 +1,15 @@
 package fmi.springboot.vpopova.recipes.controller;
 
-import fmi.springboot.vpopova.recipes.model.User;
-import fmi.springboot.vpopova.recipes.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import fmi.springboot.vpopova.recipes.model.request.LoginRequestDTO;
 import fmi.springboot.vpopova.recipes.model.request.RegisterRequestDTO;
 import fmi.springboot.vpopova.recipes.model.response.LoginResponseDTO;
 import fmi.springboot.vpopova.recipes.model.response.RegisterResponseDTO;
 import fmi.springboot.vpopova.recipes.service.IdentityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")

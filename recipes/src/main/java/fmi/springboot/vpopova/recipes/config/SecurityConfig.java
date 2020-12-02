@@ -1,5 +1,8 @@
 package fmi.springboot.vpopova.recipes.config;
 
+import fmi.springboot.vpopova.recipes.internal.JWTRequestFilter;
+import fmi.springboot.vpopova.recipes.model.Role;
+import fmi.springboot.vpopova.recipes.service.IdentityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -13,10 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import fmi.springboot.vpopova.recipes.internal.JWTRequestFilter;
-import fmi.springboot.vpopova.recipes.model.Role;
-import fmi.springboot.vpopova.recipes.service.IdentityService;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -38,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/login").permitAll()
                 .and().authorizeRequests().antMatchers("/api/users").hasRole(Role.ADMIN.name())
                 .and().authorizeRequests().antMatchers("/api/users/:userId").hasRole(Role.ADMIN.name())
-                .and().authorizeRequests().antMatchers(HttpMethod.POST,"/api/recipes").authenticated()
+                .and().authorizeRequests().antMatchers("/api/recipes").authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

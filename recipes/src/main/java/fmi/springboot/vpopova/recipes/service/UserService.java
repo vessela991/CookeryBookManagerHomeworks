@@ -1,8 +1,8 @@
 package fmi.springboot.vpopova.recipes.service;
 
-import java.util.List;
-
 import fmi.springboot.vpopova.recipes.model.User;
+
+import java.util.List;
 
 public interface UserService {
     User saveOrUpdate(User user);

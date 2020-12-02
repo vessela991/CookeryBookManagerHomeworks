@@ -1,19 +1,11 @@
 package fmi.springboot.vpopova.recipes.util;
 
-import org.passay.CharacterRule;
-import org.passay.EnglishCharacterData;
-import org.passay.LengthRule;
-import org.passay.PasswordData;
-import org.passay.PasswordValidator;
-import org.passay.RuleResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import fmi.springboot.vpopova.recipes.exception.ValidationException;
-import fmi.springboot.vpopova.recipes.model.User;
 import fmi.springboot.vpopova.recipes.model.request.RegisterRequestDTO;
 import fmi.springboot.vpopova.recipes.repository.UserRepository;
-import fmi.springboot.vpopova.recipes.service.UserService;
+import org.passay.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class Validator {
@@ -24,7 +16,7 @@ public class Validator {
     private UserRepository userRepository;
 
     PasswordValidator validator = new PasswordValidator(
-            new LengthRule(8,42),
+            new LengthRule(8, 42),
             new CharacterRule(EnglishCharacterData.Digit, 1),
             new CharacterRule(EnglishCharacterData.Special, 1)
     );

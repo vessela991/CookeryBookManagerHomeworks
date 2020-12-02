@@ -25,6 +25,7 @@ public class RegisterRequestDTO {
                 user.getGender()
         );
     }
+
     public static User toUser(RegisterRequestDTO model) {
         User user = new User();
         user.setUsername(model.getUsername());

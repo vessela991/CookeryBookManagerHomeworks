@@ -1,14 +1,12 @@
 package fmi.springboot.vpopova.recipes.model;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.validation.constraints.Size;
-
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter

@@ -1,13 +1,8 @@
 package fmi.springboot.vpopova.recipes.internal;
 
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.*;
 
 public class HeaderMapRequestWrapper extends HttpServletRequestWrapper {
     private final Map<String, String> headerMap = new HashMap<>();

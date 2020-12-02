@@ -1,10 +1,9 @@
 package fmi.springboot.vpopova.recipes.util;
 
+import fmi.springboot.vpopova.recipes.model.request.RecipeRequestDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import fmi.springboot.vpopova.recipes.model.request.RecipeRequestDTO;
 
 public class ResponseEntityUtil {
 
@@ -21,7 +20,7 @@ public class ResponseEntityUtil {
     }
 
     private static ResponseEntity getResponseEntityWithLocationHeader(String locationValue, HttpStatus httpStatus,
-            Object... locationReplaceValue) {
+                                                                      Object... locationReplaceValue) {
         HttpHeaders responseHeaders = new HttpHeaders();
 
         responseHeaders.set("Location", String.format(locationValue, locationReplaceValue));

@@ -1,9 +1,9 @@
 package fmi.springboot.vpopova.recipes.service;
 
-import java.util.List;
-
 import fmi.springboot.vpopova.recipes.model.Recipe;
 import fmi.springboot.vpopova.recipes.model.request.RecipeRequestDTO;
+
+import java.util.List;
 
 public interface RecipeService {
     String saveOrUpdate(Recipe recipe, String userId);

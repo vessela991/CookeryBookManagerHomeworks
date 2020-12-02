@@ -1,11 +1,5 @@
 package fmi.springboot.vpopova.recipes.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
 import fmi.springboot.vpopova.recipes.model.User;
 import fmi.springboot.vpopova.recipes.model.UserPrincipal;
 import fmi.springboot.vpopova.recipes.model.request.LoginRequestDTO;
@@ -16,6 +10,11 @@ import fmi.springboot.vpopova.recipes.repository.UserRepository;
 import fmi.springboot.vpopova.recipes.service.IdentityService;
 import fmi.springboot.vpopova.recipes.util.JWTUtil;
 import fmi.springboot.vpopova.recipes.util.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 @Service
 public class IdentityServiceImpl implements IdentityService {

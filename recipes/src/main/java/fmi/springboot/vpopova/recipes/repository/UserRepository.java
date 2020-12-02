@@ -1,10 +1,9 @@
 package fmi.springboot.vpopova.recipes.repository;
 
+import fmi.springboot.vpopova.recipes.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import fmi.springboot.vpopova.recipes.model.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
