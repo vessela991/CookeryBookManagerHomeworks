@@ -1,6 +1,9 @@
 package fmi.springboot.vpopova.recipes.service.impl;
 
 import fmi.springboot.vpopova.recipes.exception.NotFoundException;
+import fmi.springboot.vpopova.recipes.exception.UnauthorizedException;
+import fmi.springboot.vpopova.recipes.exception.ValidationException;
+import fmi.springboot.vpopova.recipes.model.Role;
 import fmi.springboot.vpopova.recipes.model.User;
 import fmi.springboot.vpopova.recipes.model.request.RegisterRequestDTO;
 import fmi.springboot.vpopova.recipes.repository.UserRepository;
@@ -23,7 +26,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveOrUpdate(User user) {
+
+
+        User usr = userRepository.findByUsername(user.getUsername());
+
+        if (user.getId()!=null && !user.getId().equals(usr.getId())) {
+            throw new UnauthorizedException("You dont have permission to edit this user.");
+        }
+
         validator.validateUserCredentials(RegisterRequestDTO.fromUser(user));
+
+        if (user.getId() == null) {
+            if (userRepository.findByUsername(user.getUsername()) != null) {
+                throw new ValidationException("Username already exists!");
+            }
+        }
+
         return userRepository.save(user);
     }
 

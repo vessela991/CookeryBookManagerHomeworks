@@ -24,10 +24,6 @@ public class Validator {
     public void validateUserCredentials(RegisterRequestDTO user) {
         RuleResult validation = validator.validate(new PasswordData(user.getPassword()));
 
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new ValidationException("Username already exists!");
-        }
-
         if (user.getUsername().length() > USERNAME_MAX_LENGTH) {
             throw new ValidationException("Username is more than 15 characters!");
         }

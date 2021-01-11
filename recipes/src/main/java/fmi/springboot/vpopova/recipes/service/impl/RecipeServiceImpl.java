@@ -29,7 +29,7 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         User user = userService.getUserById(userId);
-        if (user.getUserRole() == Role.ADMIN || recipe.getUserId().equals(user.getId())) {
+        if (user.getUserRole().equals(Role.ADMIN) || recipe.getUserId().equals(user.getId())) {
             return recipeRepository.save(recipe).getId();
         } else throw new UnauthorizedException("You dont have permission to delete this recipe.");
     }

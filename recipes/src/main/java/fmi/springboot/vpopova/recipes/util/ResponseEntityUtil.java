@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 
 public class ResponseEntityUtil {
 
-    public static String RECIPE_LOCATION_VALUE = "/api/users/%s/recipes/%s";
+    public static String RECIPE_LOCATION_VALUE = "/api/recipes/%s";
     public static String USER_LOCATION_VALUE = "/api/users/%s";
 
     public static ResponseEntity RecipeWithLocationHeader(RecipeRequestDTO recipeRequestDTO, HttpStatus httpStatus) {
-        return getResponseEntityWithLocationHeader(RECIPE_LOCATION_VALUE, httpStatus, recipeRequestDTO.getUserId(),
+        return getResponseEntityWithLocationHeader(RECIPE_LOCATION_VALUE, httpStatus,
                 recipeRequestDTO.getRecipeId());
     }
 

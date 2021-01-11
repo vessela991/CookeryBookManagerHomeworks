@@ -1,5 +1,6 @@
 package fmi.springboot.vpopova.recipes.service.impl;
 
+import fmi.springboot.vpopova.recipes.model.Role;
 import fmi.springboot.vpopova.recipes.model.User;
 import fmi.springboot.vpopova.recipes.model.UserPrincipal;
 import fmi.springboot.vpopova.recipes.model.request.LoginRequestDTO;
@@ -51,7 +52,20 @@ public class IdentityServiceImpl implements IdentityService {
     @Override
     public RegisterResponseDTO register(RegisterRequestDTO model) {
         validator.validateUserCredentials(model);
-        User user = userRepository.save(RegisterRequestDTO.toUser(model));
+        User user = RegisterRequestDTO.toUser(model);
+        user.setUserRole(Role.USER);
+        userRepository.save(user);
+
+        return RegisterResponseDTO.fromUser(user);
+    }
+
+    @Override
+    public RegisterResponseDTO registerAdmin(RegisterRequestDTO model) {
+        validator.validateUserCredentials(model);
+
+        User user = RegisterRequestDTO.toUser(model);
+        user.setUserRole(Role.ADMIN);
+        userRepository.save(user);
 
         return RegisterResponseDTO.fromUser(user);
     }

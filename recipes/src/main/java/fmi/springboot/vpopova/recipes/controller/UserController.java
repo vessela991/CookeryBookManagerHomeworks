@@ -35,6 +35,7 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{userId}")
     public ResponseEntity editUserById(@PathVariable("userId") String userId, @RequestBody User user) {
         user.setId(userId);

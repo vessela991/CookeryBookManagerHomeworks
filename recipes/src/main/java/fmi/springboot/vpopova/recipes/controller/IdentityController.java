@@ -27,4 +27,9 @@ public class IdentityController {
     public RegisterResponseDTO register(@RequestBody RegisterRequestDTO model) {
         return identityService.register(model);
     }
+
+    @PostMapping("/register-admin")
+    public RegisterResponseDTO registers(@RequestBody RegisterRequestDTO model) {
+        return identityService.registerAdmin(model);
+    }
 }

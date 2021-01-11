@@ -12,6 +12,8 @@ public interface IdentityService extends UserDetailsService {
 
     RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO);
 
+    RegisterResponseDTO registerAdmin(RegisterRequestDTO registerRequestDTO);
+
     @Override
     UserPrincipal loadUserByUsername(String s);
 }

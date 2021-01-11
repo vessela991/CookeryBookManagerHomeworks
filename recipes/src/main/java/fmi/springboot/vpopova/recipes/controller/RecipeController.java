@@ -61,7 +61,6 @@ public class RecipeController {
 
     @PutMapping("/{recipeId}")
     public ResponseEntity updateRecipeById(@RequestBody Recipe recipe, @PathVariable("recipeId") String recipeId) {
-        setUserIdForRecipe(recipe);
         String userId = getLoggedUserId();
         recipe.setId(recipeId);
         recipeService.saveOrUpdate(recipe, userId);
