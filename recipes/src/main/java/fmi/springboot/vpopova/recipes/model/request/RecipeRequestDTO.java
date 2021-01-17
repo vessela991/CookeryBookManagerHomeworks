@@ -6,6 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class RecipeRequestDTO {
-    String recipeId;
-    String userId;
+    Long recipeId;
+    Long userId;
 }

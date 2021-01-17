@@ -23,7 +23,7 @@ public class RecipeServiceImpl implements RecipeService {
     UserService userService;
 
     @Override
-    public String saveOrUpdate(Recipe recipe, String userId) {
+    public Long saveOrUpdate(Recipe recipe, Long userId) {
         if (recipe.getId() == null) {
             return recipeRepository.save(recipe).getId();
         }
@@ -49,7 +49,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
+        return (List<Recipe>) recipeRepository.findAll();
     }
 
     @Override

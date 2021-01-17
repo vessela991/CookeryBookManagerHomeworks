@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head('Login')" />
+<body>
+<div th:replace="menu :: menu(${loggedUser})" />
+<div class="container col-3 margin-top">
+    <h2 class="align-center">Login</h2>
+    <form th:object="${user}" method="post">
+        <div class="input-group flex-nowrap margin-bottom">
+            <label class="input-group-text" for="username">Username</label>
+            <input type="text" th:value="${user?.username}" id="username" name="username"
+                   class="form-control">
+        </div>
+
+        <div class="input-group flex-nowrap margin-bottom">
+            <label class="input-group-text" for="password">Password&nbsp;</label>
+            <input type="password" th:value="${user?.password}" id="password" name="password"
+                   class="form-control">
+        </div>
+
+        <div class="d-grid gap-2 col-4 mx-auto margin-bottom">
+            <button type="submit" class="btn btn-primary" id="submit" name="submit"
+                    value="submit">Login</button>
+        </div>
+
+        <div th:if="${error != null}" class="errors alert alert-danger">
+            <span th:text="${error}"></span>
+        </div>
+    </form>
+</div>
+</body>
+</html>

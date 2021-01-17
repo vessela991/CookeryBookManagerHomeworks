@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head('Users')"></head>
+<body>
+<div th:replace="menu :: menu(${loggedUser})"></div>
+<div class="d-md-flex flex-wrap" >
+    <div th:each="user : ${users}" class="card card-style">
+        <div th:replace="user :: user(${user})"></div>
+
+        <ul class="list-group list-group-flush">
+            <li th:action="@{/users}" class="list-group-item d-flex justify-content-around">
+                <form method="post">
+                    <button type="submit" name="userEditId" class="btn btn-primary" th:value="${user.id}">
+                        Edit
+                    </button>
+                    <button type="submit" name="userDeleteId" class="btn btn-danger" th:value="${user.id}">
+                        Delete
+                    </button>
+                </form>
+            </li>
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>

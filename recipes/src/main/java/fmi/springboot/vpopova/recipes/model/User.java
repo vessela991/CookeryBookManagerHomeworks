@@ -1,11 +1,16 @@
 package fmi.springboot.vpopova.recipes.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -13,12 +18,15 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("users")
+@Entity
+@Table(name = "users")
 public class User {
     @Id
-    private String id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+
     @NonNull
-    @Indexed(unique = true)
+    @Column(unique=true)
     @Size(max = 15)
     private String username;
     @NonNull
@@ -29,10 +37,12 @@ public class User {
     @NonNull
     private Role userRole = Role.USER;
     @NonNull
+    @Size(max = 512)
     private String userInfo;
     @NonNull
     private AccountStatus accountStatus = AccountStatus.ACTIVE;
     private Date registrationTime = new Date();
     private Date lastModified = new Date();
+    @Lob
     private MultipartFile picture;
 }

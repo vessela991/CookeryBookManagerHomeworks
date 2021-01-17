@@ -1,0 +1,61 @@
+<div th:fragment="user(user)" xmlns:th="http://www.thymeleaf.org">
+<!--    <div class="d-none">-->
+<!--        <input type="text" th:value="*{id}" id="id" name="id" class="form-control">-->
+<!--    </div>-->
+
+    <div class="input-group flex-nowrap margin-bottom">
+        <label class="input-group-text" for="username">Username</label>
+        <input type="text" th:value="${user?.username}" id="username" name="username"
+               class="form-control">
+    </div>
+
+    <div class="input-group flex-nowrap margin-bottom">
+        <label class="input-group-text" for="password">Password&nbsp;</label>
+        <input type="password" th:value="${user?.password}" id="password" name="password"
+               class="form-control">
+    </div>
+
+    <div th:if="${loggedUser != null && loggedUserUtil.isAdmin(loggedUser)}" class="margin-bottom">
+        <label class="input-group-text margin-bottom">User Role</label>
+
+        <div class="form-check radio-input-indent">
+            <input class="form-check-input" type="radio" name="userRole" id="userRoleAdmin"
+                   value="ADMIN" th:checked="${user?.userRole}">
+            <label class="form-check-label" for="userRoleAdmin">Admin</label>
+        </div>
+
+        <div class="form-check radio-input-indent">
+            <input class="form-check-input" type="radio" name="userRole" id="userRoleUser"
+                   value="USER" th:checked="${user?.userRole}">
+            <label class="form-check-label" for="userRoleUser">User</label>
+        </div>
+    </div>
+
+    <div class="margin-bottom">
+        <label class="input-group-text margin-bottom">Gender</label>
+
+        <div class="form-check radio-input-indent">
+            <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                   value="MALE" th:checked="${user?.gender}">
+            <label class="form-check-label" for="genderMale">Male</label>
+        </div>
+
+        <div class="form-check radio-input-indent">
+            <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                   value="FEMALE" th:checked="${user?.gender}">
+            <label class="form-check-label" for="genderFemale">Female</label>
+        </div>
+
+        <div class="form-check radio-input-indent">
+            <input class="form-check-input" type="radio" name="gender" id="genderOther"
+                   value="OTHER" th:checked="${user?.gender}">
+            <label class="form-check-label" for="genderOther">Other</label>
+        </div>
+    </div>
+
+    <div class="margin-bottom">
+        <label class="input-group-text margin-bottom" for="userInfo">User information</label>
+        <textarea name="userInfo" rows="4" cols="50" th:text="${user?.userInfo}" id="userInfo"
+                  class="form-control"></textarea>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head('Add recipe')" />
+<body>
+<div th:replace="menu :: menu(${loggedUser})" />
+<div class="container col-5 margin-top">
+    <h2 th:text=${title} class="align-center"></h2>
+    <form th:object = "${recipe}" method="post" enctype="multipart/form-data">
+
+        <div class="d-none">
+            <input type="text" th:value="${recipe?.id == 0 ? 0 : 1}" id="id" name="id"
+                   class="form-control">
+        </div>
+
+        <div class="input-group flex-nowrap margin-bottom">
+            <label class="input-group-text" for="name">Name</label>
+            <input type="text" th:value="*{name}" id="name" name="name" class="form-control">
+        </div>
+
+        <div class="input-group flex-nowrap margin-bottom">
+            <label class="input-group-text" for="timeToCook">Time to cook</label>
+            <input type="number" min="0" th:value="*{timeToCook} == null ? '0' : *{timeToCook}"
+                   id="timeToCook" name="timeToCook" class="form-control">
+        </div>
+
+        <div class="margin-bottom">
+            <label class="input-group-text margin-bottom" for="shortDescription">
+                Short description
+            </label>
+            <textarea name="shortDescription" rows="4" cols="50" th:text="*{shortDescription}"
+                      id="shortDescription" class="form-control"></textarea>
+        </div>
+        <div class="margin-bottom">
+            <label class="input-group-text margin-bottom" for="longDescription">
+                Long description
+            </label>
+            <textarea name="longDescription" rows="4" cols="50" th:text="*{longDescription}"
+                      id="longDescription" class="form-control"></textarea>
+        </div>
+        <div class="margin-bottom">
+            <label class="input-group-text margin-bottom" for="products">Products</label>
+            <textarea name="products" rows="4" cols="50" th:text="${StringUtil.StringRemoveBrackets(recipe.products)}"
+                      id="products" class="form-control"></textarea>
+        </div>
+        <div class="margin-bottom">
+            <label class="input-group-text margin-bottom" for="tags">Tags</label>
+            <textarea name="tags" rows="4" cols="50" th:text="${StringUtil.StringRemoveBrackets(recipe.tags)}"
+                      id="tags" class="form-control"></textarea>
+        </div>
+
+        <div class="input-group margin-bottom">
+            <input type="file" th:field="*{picture}" th:value="*{picture}" class="form-control"
+                   id="picture" name="picture">
+        </div>
+
+        <div class="d-grid gap-2 col-4 mx-auto margin-bottom">
+            <button type="submit" class="btn btn-primary" id="submit" name="submit"
+                    value="submit">Add</button>
+        </div>
+
+        <div th:if="${error != null}" class="errors alert alert-danger">
+            <span th:text="${error}"></span>
+        </div>
+    </form>
+</div>
+</body>
+</html>

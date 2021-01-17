@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterResponseDTO {
-    private String id;
+    private Long id;
 
     public static RegisterResponseDTO fromUser(User user) {
         RegisterResponseDTO response = new RegisterResponseDTO();

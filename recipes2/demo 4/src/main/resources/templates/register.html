@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head(${title})"></head>
+<body>
+<div th:replace="menu :: menu(${loggedUser})"></div>
+<div class="container col-5 margin-top">
+    <h2 th:text="${title}" class="align-center"></h2>
+    <form th:object="${user}" method="post" enctype="multipart/form-data">
+        <div th:replace="user :: user(${user})"></div>
+
+        <div th:if="${loggedUser == null}" class="input-group margin-bottom">
+            <input type="file" class="form-control" th:value="${user?.picture}" id="picture"
+                   name="picture" value="Upload">
+        </div>
+
+        <div class="d-grid gap-2 col-4 mx-auto margin-bottom">
+            <button type="submit" class="btn btn-primary" id="submit" name="submit"
+                    th:text="${title}" value="submit"></button>
+        </div>
+
+        <div th:if="${error != null}" class="errors alert alert-danger">
+            <span th:text="${error}"></span>
+        </div>
+    </form>
+</div>
+</body>
+</html>

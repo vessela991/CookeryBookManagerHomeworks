@@ -4,7 +4,6 @@ import fmi.springboot.vpopova.recipes.model.Recipe;
 import fmi.springboot.vpopova.recipes.model.request.RecipeRequestDTO;
 import fmi.springboot.vpopova.recipes.service.RecipeService;
 import fmi.springboot.vpopova.recipes.service.UserService;
-import fmi.springboot.vpopova.recipes.util.JWTUtil;
 import fmi.springboot.vpopova.recipes.util.ResponseEntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,17 +35,17 @@ public class RecipeController {
     @PostMapping
     public ResponseEntity createRecipe(@RequestBody Recipe recipe) {
         setUserIdForRecipe(recipe);
-        String userId = getLoggedUserId();
-        String recipeId = recipeService.saveOrUpdate(recipe, userId);
+        Long userId = getLoggedUserId();
+        Long recipeId = recipeService.saveOrUpdate(recipe, userId);
         return ResponseEntityUtil.RecipeWithLocationHeader(new RecipeRequestDTO(recipeId, userId), HttpStatus.CREATED);
     }
 
     private void setUserIdForRecipe(@RequestBody Recipe recipe) {
-        String userId = getLoggedUserId();
+        Long userId = getLoggedUserId();
         recipe.setUserId(userId);
     }
 
-    private String getLoggedUserId() {
+    private Long getLoggedUserId() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String username = userDetails.getUsername();
@@ -55,13 +54,14 @@ public class RecipeController {
 
     @GetMapping("/{recipeId}")
     @ResponseStatus(HttpStatus.OK)
-    public Recipe getRecipeById(@PathVariable String recipeId) {
+    public Recipe getRecipeById(@PathVariable Long recipeId) {
         return recipeService.getRecipeById(new RecipeRequestDTO(recipeId, getLoggedUserId()));
     }
 
     @PutMapping("/{recipeId}")
-    public ResponseEntity updateRecipeById(@RequestBody Recipe recipe, @PathVariable("recipeId") String recipeId) {
-        String userId = getLoggedUserId();
+    public ResponseEntity updateRecipeById(@RequestBody Recipe recipe,
+            @PathVariable("recipeId") Long recipeId) {
+        Long userId = getLoggedUserId();
         recipe.setId(recipeId);
         recipeService.saveOrUpdate(recipe, userId);
         return ResponseEntityUtil.RecipeWithLocationHeader(new RecipeRequestDTO(recipeId, userId), HttpStatus.OK);
@@ -69,7 +69,7 @@ public class RecipeController {
 
     @DeleteMapping("/{recipeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteRecipeById(@PathVariable String recipeId) {
+    public void deleteRecipeById(@PathVariable Long recipeId) {
         recipeService.deleteRecipeById(new RecipeRequestDTO(recipeId, getLoggedUserId()));
     }
 }

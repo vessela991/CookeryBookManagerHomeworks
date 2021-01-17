@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head('Recipes')" />
+<body>
+<div th:replace="menu :: menu(${loggedUser})" />
+<div class="d-flex justify-content-center" >
+    <div th:object="${recipe}" class="card recipe-card-style">
+        <div class="recipe-image-container">
+            <img th:src="@{'data:image/jpg;base64,'+${recipe.picture}}"
+                 class="card-img-top" alt="...">
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title" th:text = "${recipe.name}"></h5>
+            <p class="card-text" th:text = "${recipe.shortDescription}"></p>
+            <textarea class="card-text tr-w100" rows="8" th:text = "${recipe.longDescription}">
+            </textarea>
+        </div>
+
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text = "${recipe.timeToCook} + ' minutes'"></li>
+            <li class="list-group-item" th:text = "${StringUtil.StringRemoveBrackets(recipe.products)}"></li>
+            <li class="list-group-item" th:text = "${StringUtil.StringRemoveBrackets(recipe.tags)}"></li>
+        </ul>
+
+        <form th:action="@{/}"
+              th:if="${loggedUser != null and LoggedUser.isOwnerOrAdmin(loggedUser, recipe)}"
+              class="card-body" method="post">
+            <button type="submit" name="editId" class="btn btn-primary" th:value="${recipe.id}">
+                Edit
+            </button>
+            <button type="submit" name="deleteId" class="btn btn-danger" th:value="${recipe.id}">
+                Delete
+            </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

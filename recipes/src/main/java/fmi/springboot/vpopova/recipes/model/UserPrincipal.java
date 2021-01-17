@@ -31,7 +31,7 @@ public class UserPrincipal implements UserDetails {
         return authorities;
     }
 
-    public String getId() {
+    public Long getId() {
         return user.getId();
     }
 

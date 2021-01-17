@@ -6,6 +6,7 @@ import fmi.springboot.vpopova.recipes.util.ResponseEntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,13 +32,14 @@ public class UserController {
 
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public User getUserById(@PathVariable("userId") String userId) {
+    public User getUserById(@PathVariable("userId") Long userId) {
         return userService.getUserById(userId);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{userId}")
-    public ResponseEntity editUserById(@PathVariable("userId") String userId, @RequestBody User user) {
+    public ResponseEntity editUserById(@PathVariable("userId") Long userId, @RequestBody User user, Model model) {
+        model.addAttribute("user", user);
         user.setId(userId);
         User updatedUser = userService.saveOrUpdate(user);
 
@@ -47,7 +49,7 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUserById(@PathVariable("userId") String userId) {
+    public void deleteUserById(@PathVariable("userId") Long userId) {
         userService.deleteUserById(userId);
     }
 }

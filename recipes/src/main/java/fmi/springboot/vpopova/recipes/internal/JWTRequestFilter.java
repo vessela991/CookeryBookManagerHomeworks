@@ -1,8 +1,7 @@
 package fmi.springboot.vpopova.recipes.internal;
 
 import fmi.springboot.vpopova.recipes.model.UserPrincipal;
-import fmi.springboot.vpopova.recipes.service.IdentityService;
-import fmi.springboot.vpopova.recipes.util.JWTUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

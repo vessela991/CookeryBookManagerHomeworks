@@ -15,7 +15,7 @@ public class ResponseEntityUtil {
                 recipeRequestDTO.getRecipeId());
     }
 
-    public static ResponseEntity UserWithLocationHeader(String userId, HttpStatus httpStatus) {
+    public static ResponseEntity UserWithLocationHeader(Long userId, HttpStatus httpStatus) {
         return getResponseEntityWithLocationHeader(USER_LOCATION_VALUE, httpStatus, userId);
     }
 
