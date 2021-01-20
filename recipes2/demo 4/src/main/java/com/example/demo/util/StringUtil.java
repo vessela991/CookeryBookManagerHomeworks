@@ -1,11 +1,13 @@
 package com.example.demo.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StringUtil {
-    public String StringRemoveBrackets(String str) {
+    public String removeBrackets(String str) {
         if (str == null) {
             return "";
         }
-        String r1 = str.replace("[", "");
-        return r1.replace("]", "");
+        return str.replace("[", "").replace("]", "");
     }
 }

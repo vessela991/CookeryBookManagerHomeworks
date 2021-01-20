@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.recipe;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -11,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
+import com.example.demo.model.recipe.request.RecipeCreateModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,9 +52,7 @@ public class Recipe {
 
     public static Recipe fromRecipeCreateModel(RecipeCreateModel recipeCreateModel, String picture, Long userId) {
         Recipe recipe = new Recipe();
-        if (recipeCreateModel.getId() != 0) {
-            recipe.setId(recipeCreateModel.getId());
-        }
+        recipe.setId(recipeCreateModel.getId());
         recipe.setName(recipeCreateModel.getName());
         recipe.setLongDescription(recipeCreateModel.getLongDescription());
         recipe.setShortDescription(recipeCreateModel.getShortDescription());

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="head :: head('Users')"></head>
+<head th:replace="common/head :: head('Users')"></head>
 <body>
-<div th:replace="menu :: menu(${loggedUser})"></div>
+<div th:replace="common/menu :: menu(${loggedUser}, ${loggedUserUtil})"></div>
 <div class="d-md-flex flex-wrap" >
     <div th:each="user : ${users}" class="card card-style">
-        <div th:replace="user :: user(${user})"></div>
+        <div th:replace="user/user-card :: user-card(${user}, ${loggedUser}, ${loggedUserUtil})"></div>
+
+        <div class="recipe-image-container">
+            <img th:src="@{'data:image/jpg;base64,'+ ${user.picture}}" class="card-img-top" alt="...">
+        </div>
 
         <ul class="list-group list-group-flush">
-            <li th:action="@{/users}" class="list-group-item d-flex justify-content-around">
-                <form method="post">
+            <li class="list-group-item d-flex justify-content-around">
+                <form method="post" th:action="@{/users}">
                     <button type="submit" name="userEditId" class="btn btn-primary" th:value="${user.id}">
                         Edit
                     </button>
@@ -19,7 +23,6 @@
                 </form>
             </li>
         </ul>
-
     </div>
 </div>
 </body>

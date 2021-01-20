@@ -1,8 +1,10 @@
-package com.example.demo.model;
+package com.example.demo.model.user;
 
-import java.io.BufferedOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.example.demo.model.user.request.UserRegisterModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Setter
@@ -24,7 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -50,13 +56,15 @@ public class User implements Serializable {
     @Column(length = Integer.MAX_VALUE)
     private String picture;
 
-    public static User fromUserRegisterModel(UserRegisterModel userRegisterModel) {
+    public static User fromUserRegisterModel(UserRegisterModel userRegisterModel, String picture) {
         User user = new User();
+        user.setId(userRegisterModel.getId());
         user.setUsername(userRegisterModel.getUsername());
         user.setPassword(userRegisterModel.getPassword());
         user.setUserInfo(userRegisterModel.getUserInfo());
         user.setGender(userRegisterModel.getGender());
+        user.setUserRole(userRegisterModel.getUserRole());
+        user.setPicture(picture);
         return user;
     }
-
 }

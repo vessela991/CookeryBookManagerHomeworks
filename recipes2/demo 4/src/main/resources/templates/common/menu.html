@@ -1,4 +1,4 @@
-<div th:fragment="menu(loggedUser)" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu(loggedUser, loggedUserUtil)" xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -18,12 +18,12 @@
                     <a class="nav-link" href="/recipe-form">Create recipe</a>
                 </li>
 
-                <li th:if="${loggedUser != null and loggedUser.userRole.name() == 'ADMIN'}"
+                <li th:if="${loggedUser != null && loggedUserUtil.isAdmin(loggedUser)}"
                     class="nav-item">
                     <a class="nav-link" href="/register">Create user</a>
                 </li>
 
-                <li th:if="${loggedUser != null and loggedUser.userRole.name() == 'ADMIN'}"
+                <li th:if="${loggedUser != null && loggedUserUtil.isAdmin(loggedUser)}"
                     class="nav-item">
                     <a class="nav-link" href="/users">Users</a>
                 </li>

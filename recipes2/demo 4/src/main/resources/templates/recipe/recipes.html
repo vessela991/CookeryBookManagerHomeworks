@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head(${title})"></head>
+<body>
+<div th:replace="common/menu :: menu(${loggedUser}, ${loggedUserUtil})"></div>
+<form th:object="${recipe}" class="d-md-flex flex-wrap">
+    <div th:each="recipe : ${recipes}" class="card card-style">
+        <div class="image-container">
+            <img th:src="@{'data:image/jpg;base64,'+${recipe.picture}}"
+                 class="card-img-top" alt="...">
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title" th:text = "${recipe.name}"></h5>
+            <p class="card-text" th:text = "${recipe.shortDescription}"></p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text = "${recipe.timeToCook} + ' minutes'"></li>
+            <li class="list-group-item" th:text = "${stringUtil.removeBrackets(recipe.products)}"></li>
+            <li class="list-group-item" th:text = "${stringUtil.removeBrackets(recipe.tags)}"></li>
+
+            <li class="list-group-item d-flex justify-content-center">
+                <button type="submit" name="id" class="btn btn-primary" formaction="/recipe?id="
+                        formmethod="get" th:value="${recipe.id}">
+                    View recipe
+                </button>
+            </li>
+
+            <li th:if="${loggedUser != null && loggedUserUtil.isOwnerOrAdmin(loggedUser, recipe)}"
+                class="list-group-item d-flex justify-content-around">
+                <button type="submit" name="id" class="btn btn-primary" formaction="/recipe-form?id="
+                        formmethod="get" th:value="${recipe.id}">
+                    Edit
+                </button>
+                <button type="submit" name="id" class="btn btn-danger" formaction="/recipe"
+                        formmethod="post" th:value="${recipe.id}">
+                    Delete
+                </button>
+            </li>
+        </ul>
+    </div>
+</form>
+</body>
+</html>

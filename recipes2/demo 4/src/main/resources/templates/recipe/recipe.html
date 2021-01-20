@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head(${title})"></head>
+<body>
+<div th:replace="common/menu :: menu(${loggedUser}, ${loggedUserUtil})"></div>
+<form th:action="@{/recipe}" method="post" th:object="${recipe}" class="card recipe-card-style d-flex justify-content-center">
+        <div class="recipe-image-container">
+            <img th:src="@{'data:image/jpg;base64,'+${recipe.picture}}"
+                 class="card-img-top" alt="...">
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title" th:text = "${recipe.name}"></h5>
+            <p class="card-text" th:text = "${recipe.shortDescription}"></p>
+            <textarea class="card-text tr-w100" rows="8" th:text = "${recipe.longDescription}">
+            </textarea>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text = "${recipe.timeToCook} + ' minutes'"></li>
+            <li class="list-group-item" th:text = "${stringUtil.removeBrackets(recipe.products)}"></li>
+            <li class="list-group-item" th:text = "${stringUtil.removeBrackets(recipe.tags)}"></li>
+        </ul>
+
+        <div class="card-body">
+            <button th:if="${loggedUser != null && loggedUserUtil.isOwnerOrAdmin(loggedUser, recipe)}"
+                    type="submit" name="id" class="btn btn-primary" formaction="/recipe-form?id="
+                    formmethod="get" th:value="${recipe.id}">
+                Edit
+            </button>
+            <button th:if="${loggedUser != null && loggedUserUtil.isOwnerOrAdmin(loggedUser, recipe)}"
+                    type="submit" name="id" class="btn btn-danger" formaction="/recipe"
+                    formmethod="post" th:value="${recipe.id}">
+                Delete
+            </button>
+        </div>
+</form>
+</body>
+</html>

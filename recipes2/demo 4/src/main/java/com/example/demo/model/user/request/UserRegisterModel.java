@@ -1,11 +1,12 @@
-package com.example.demo.model;
+package com.example.demo.model.user.request;
 
-import org.springframework.web.multipart.MultipartFile;
-
+import com.example.demo.model.user.Gender;
+import com.example.demo.model.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
